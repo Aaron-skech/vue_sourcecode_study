@@ -1,7 +1,7 @@
 <template>
   <div class="edit">
     <div class="edit-list">
-      <button>运行</button>
+      <button @click="$emit('run')">运行</button>
       <button>清空</button>
       {{code}}
     </div>
@@ -18,7 +18,8 @@ export default {
     },
     methods:{
         handleInput(e){
-            this.code = e.target.value
+            this.code = e.target.value;
+            this.$emit('input',this.code)
 
         },
         handleKeyDown(){

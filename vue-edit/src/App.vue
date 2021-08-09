@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Edit />
-    <Show />
+    <Edit  @input="handleInput" @run="handleRun" />
+    <Show  :code="code" ref="show" />
   </div>
 </template>
 
@@ -13,6 +13,22 @@ export default {
     Edit,
     Show,
   },
+  data(){
+    return{
+      code:''
+    }
+  },
+  methods:{
+    handleInput(v){
+      this.code =v;
+
+    },
+    handleRun(){
+    this.$refs.show.run()
+
+  }
+  },
+
 };
 </script>
 
