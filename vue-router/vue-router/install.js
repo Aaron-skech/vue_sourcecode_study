@@ -15,12 +15,17 @@ const  install = function(_Vue){
     Vue.mixin({
         beforeCreate(){
             //mixin可以给beforeCreate 这个生命周期增加合并的方法
-            console.log('name',this.$options.router);
+           // console.log('name',this.$options.router);
             if(this.$options.router){
-                console.log('root',this.$options.name)
+               this._routerRoot = this;//将当前根实例放到_routerRoot上
+               this._router =this.$options.router;
+               //当前用户的router属性
+               this._router.init(this);//调用插件中的init方法
             }else{
-                console.log('sub',this.$options.name)
+                this._routerRoot = this.$parent._routerRoot;
             }
+            //这里所有组件都拥有了 this._routerRoot属性
+            console.log(this._routerRoot._router)
 
         }
     })
