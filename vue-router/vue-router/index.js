@@ -20,6 +20,11 @@ class VueRouter{
       }
 
     }
+    match(location){
+      //做一个中转
+        return this.matcher.match(location);
+
+    }
     init(){//app指代根实例
         //需要根据用户的配置 做出一个映射表
 
