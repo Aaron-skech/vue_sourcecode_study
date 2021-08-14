@@ -30,7 +30,16 @@ const  install = function(_Vue){
 
         }
     })
-    
+    Object.defineProperty(Vue.prototype,'$route',{//存放的都是属性 path matched
+        get(){
+            return this._routerRoot && this._routerRoot._route;//取current
+        }
+    })
+    Object.defineProperty(Vue.prototype,'$router',{//存放的都是属性 path matched
+        get(){
+            return this._routerRoot && this._routerRoot._router;//取router的实例
+        }
+    })
     
 }
 export default install;

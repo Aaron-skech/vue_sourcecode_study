@@ -38,3 +38,6 @@ export default new VueRouter({
     routes,
     mode:"hash"
 })
+
+
+
