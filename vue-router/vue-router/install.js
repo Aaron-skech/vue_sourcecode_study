@@ -21,8 +21,9 @@ const  install = function(_Vue){
                this._router =this.$options.router;
                //当前用户的router属性
                this._router.init(this);//调用插件中的init方法
+               Vue.util.defineReactive(this,'_route',this._router.history.current);
             }else{
-                this._routerRoot = this.$parent._routerRoot;
+                this._routerRoot = this.$parent && this.$parent._routerRoot;
             }
             //这里所有组件都拥有了 this._routerRoot属性
             console.log(this._routerRoot._router)

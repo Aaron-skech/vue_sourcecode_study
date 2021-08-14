@@ -25,7 +25,7 @@ class VueRouter{
         return this.matcher.match(location);
 
     }
-    init(){//app指代根实例
+    init(app){//app指代根实例
         //需要根据用户的配置 做出一个映射表
 
         //需要根据当前路径 实现一个页面跳转逻辑
@@ -41,7 +41,12 @@ class VueRouter{
           //transitionTo 跳转逻辑 hash browser 都有
           // getCurrentLocation hash和browser不一样
            //setupListener hash 监听
+          history.listen((route)=>{
+              app._route = route;
+              console.log(route,'================')
+          })
     }
+   
 
 }
 
