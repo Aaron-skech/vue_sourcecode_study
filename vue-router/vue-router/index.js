@@ -18,6 +18,7 @@ class VueRouter{
           break;
         default:'';
       }
+      this.beforeHooks = [];
 
     }
     match(location){
@@ -43,8 +44,16 @@ class VueRouter{
            //setupListener hash 监听
           history.listen((route)=>{
               app._route = route;
-              console.log(route,'================')
           })
+    }
+    push(location){
+      //const history = this.history;
+      window.location.hash = location;
+
+    }
+    beforeEach(fn){
+      this.beforeHooks.push(fn);
+
     }
    
 
