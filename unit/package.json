@@ -1,0 +1,17 @@
+{
+  "name": "unit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parser.test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "jest": "^27.0.6"
+  }
+}
