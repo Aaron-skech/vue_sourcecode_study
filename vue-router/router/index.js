@@ -34,7 +34,18 @@ let routes = [
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
-    mode:'hash',
-    routes
+const router = new VueRouter({
+    routes,
+    mode:"hash"
 })
+
+router.beforeEach((to,from,next)=>{
+    next()
+})
+router.beforeEach((to,from,next)=>{
+    next()
+})
+export default router;
+
+
+

@@ -1,33 +1,29 @@
 import History from './base';
 
-const ensureSlash=()=>{
-    if(window.location.hash){
-        return;
-    }
-    //window.location.hash = '/';
 
+const ensureSlash = ()=>{
+    if(window.location.hash){
+        return
+    }
+    window.location.hash= '/';
 }
 
-export default class HashHistory extends History{
-    constructor(router){
-        super(router)
-        this.router=router;
-       // console.log("hashHistory")  如果使用hashHistory 默认如果没有hash 应该跳转到 首页 #/
+export default class HashHistory extends History {
 
-       ensureSlash();
-
+    constructor(router) {
+        super(router);
+        this.router = router;
+        console.log("new hash");
+        //如果使用hashHistory 默认如果没有hash 应该跳转到 首页 #/
+        ensureSlash();
     }
-
-    getCurrentLocation(){
-        return window.location.hash.slice(1);
-
+    getCurrentLoction(){
+        return window.location.hash.slice(1);//去掉#号
     }
     setupListener(){
-
-        window.addEventListener('hashchange',()=>{
-            console.log('hash变化了')
-
+        window.addEventListener("hashchange",()=>{
+            //hash变化 需要再次执行匹配操作
+            this.transitionTo(this.getCurrentLoction())
         })
     }
-
 }

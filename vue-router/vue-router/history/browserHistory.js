@@ -1,5 +1,5 @@
 import History from './base';
 
-export default class BrowserHistory extends History{
-
+export default class browserHistory extends History{
+    
 }
