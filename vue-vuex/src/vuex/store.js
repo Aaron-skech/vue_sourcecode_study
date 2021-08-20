@@ -19,7 +19,8 @@ class Store{
                 return fn(this.state);
             }
             Object.defineProperty(this.getters,key,{
-                get:()=>{this._vm[key]}
+            
+                get:()=>this._vm[key]
             })
 
         })
@@ -28,7 +29,27 @@ class Store{
                 $$state:state,//内部的状态
             },
             computed
+        });
+        //发布订阅模式 将用户定义的mutation和action先保存起来 稍后 当调用commit时 就找订阅的mutation方法 调用dispatch 就找对应的action方法
+
+        this._mutations = {};
+        forEach(options.mutations,(fn,type)=>{
+            this._mutations[type] = (payload)=>fn.call(this,this.state,payload)
+
         })
+        this._actions = {};
+        forEach(options.actions,(fn,type)=>{
+            this._actions[type] = (payload)=>fn.call(this,this,payload)
+
+        })
+    }
+    commit = (type,payload)=>{
+        this._mutations[type](payload);
+
+    }
+    dispatch = (type,payload)=>{
+        this._actions[type](payload);
+
     }
     //类的属性访问器, 当用户去这个实例上取state属性时 会执行此方法
     get state(){

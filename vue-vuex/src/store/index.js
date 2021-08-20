@@ -10,7 +10,6 @@ export default new Vuex.Store({
   },
   getters:{
     getAge(state){
-      console.log('getter执行')
       return state.age + 18;
     }
 
@@ -26,7 +25,7 @@ export default new Vuex.Store({
       setTimeout(()=>{
         commit('changeAge',payload)
 
-      },2000)
+      },1000)
 
     }
 

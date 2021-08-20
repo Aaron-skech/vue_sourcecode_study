@@ -5,8 +5,8 @@
 
      <button @click="$store.state.a+=3">按钮</button>   同步更新 <br>
 
-    <!-- <button @click="$store.commit('changeAge',5)">按钮</button>   同步更新 <br>
-    <button @click="$store.dispatch('changeAge',5)">按钮</button>    异步更新 -->
+   <button @click="$store.commit('changeAge',5)">按钮</button>   同步更新 <br>
+     <button @click="$store.dispatch('changeAge',5)">按钮</button>    异步更新
 
   </div>
 </template>
