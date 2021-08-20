@@ -1,21 +1,35 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex from '../vuex/index'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    age:18
+    age:10,
+    a:1
   },
   getters:{
     getAge(state){
-      return state.age + 5;
+      console.log('getter执行')
+      return state.age + 18;
     }
 
   },
   mutations: {
+    changeAge(state,payload){
+      state.age += payload;
+
+    }
   },
   actions: {
+    changeAge({commit},payload){
+      setTimeout(()=>{
+        commit('changeAge',payload)
+
+      },2000)
+
+    }
+
   },
   modules: {
   }
