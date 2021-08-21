@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      我的年龄是：  {{$store.state.a}} <br>
+      我的年龄是：  {{$store.state.age}} <br>
       我的年龄是：  {{$store.getters.getAge}} <br>
 
      <button @click="$store.state.a+=3">按钮</button>   同步更新 <br>
