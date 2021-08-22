@@ -5,7 +5,10 @@ import ModuleCollection from './module/module-collection'
 let Vue;
 
 function installModule(store, rootState, path, module) {
-
+  
+    //注册事件时 需要注册到对应的命名空间中 path就是所有的路径 根据path算出一个空间
+    let namespaced = store._modules.getNamespaced(path);
+    console.log(namespaced,'namespaced',module)
     if (path.length > 0) {
         let parent = path.slice(0, -1).reduce((memo, current) => {
             return memo[current];
@@ -17,21 +20,21 @@ function installModule(store, rootState, path, module) {
 
 
     module.forEachMutations((mutation, type) => {
-        store._mutations[type] = store._mutations[type] || [];
-        store._mutations[type].push((payload) => {
+        store._mutations[namespaced+type] = store._mutations[namespaced+type] || [];
+        store._mutations[namespaced+type].push((payload) => {
             mutation.call(store, module.state, payload)
         })
 
     })
     module.forEachActions((action, type) => {
-        store._actions[type] = store._actions[type] || [];
-        store._actions[type].push((payload) => {
-            actions.call(store, store, payload)
+        store._actions[namespaced+type] = store._actions[namespaced+type] || [];
+        store._actions[namespaced+type].push((payload) => {
+            action.call(store, store, payload)
         })
     })
     module.forEachGetters((getter, key) => {
         //如果getters重名 则会覆盖 所有模块的getters 都会定义到根模块上去
-        store._wrappedGetters[key] = function () {
+        store._wrappedGetters[namespaced+key] = function () {
             return getter(module.state)
         }
     })
@@ -75,11 +78,11 @@ class Store {
         this._mutations = {};//存放所有模块中的mutations
         this._actions = {};//存放所有模块中的actions
         this._wrappedGetters = {};//存放所有模块中的getters
-        installModule(this, state, [], this._modules.root)
+        installModule(this,state, [], this._modules.root)
 
-        // console.log(this._mutations)
-        // console.log(this._actions)
-        // console.log(this._wrappedGetters)
+        console.log(this._mutations)
+        console.log(this._actions)
+        console.log(this._wrappedGetters)
         // console.log(state)
         resetStoreVm(this, state);
 
